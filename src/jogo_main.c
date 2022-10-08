@@ -31,21 +31,55 @@ tElementoMatriz initElementoMatriz(){
 }
 //----------------------------------------
 
-void printJogo(){
-    printf("");
+void printJogo(char jogo[3][3]){
+    int i, j;
+    char linhas[3] = {'A', 'B', 'C'};
+
+    system("cls");
+
+    printf("    1   2   3\n");
+    for (i = 0; i < 3; i++){
+        printf("%c ", linhas[i]);
+        for (j = 0; j < 3; j++){
+            printf("| %c ", jogo[i][j]);
+        }
+        printf("|\n");
+    } 
 }
 
-int fimJogo(int r){
+int fimJogo(int r, char jogo[3][3]){
+    int i;
+
+    //VALIDAÇÃO PARA SABER SE EXISTE ALGUMA LINHA, COLUNA OU DIAGONAL DE MESMO VALOR
+    for (i = 0; i < 3; i++){
+        if (jogo[i][0] == jogo[i][1] && jogo[i][1] == jogo[i][2]){
+            return 1;
+        }
+    }
+    for (i = 0; i < 3; i++){
+        if (jogo[0][i] == jogo[1][i] && jogo[1][i] == jogo[2][i]){
+            return 1;
+        }
+    }
+    if (jogo[0][0] == jogo[1][1] && jogo[1][1] == jogo[2][2]){
+        return 1;
+    }
+    if (jogo[2][0] == jogo[1][1] && jogo[1][1] == jogo[0][2]){
+        return 1;
+    }
+
+    //SE O NÚMERO DE RODADAS É 9 NÃO HÁ MAIS MOVIMENTOS POSSÍVEIS
     if(r == 9){
         return 1;
     }
+
     return 0;
 }
 
 int main(){
 
     char jogo [3] [3];
-    char linhas[3] = {'A', 'B', 'C'};
+    
 
     tElementoMatriz elemento;
 
@@ -61,16 +95,7 @@ int main(){
 
     do{
         
-        system("cls");
-
-        printf("    1   2   3\n");
-        for (i = 0; i < 3; i++){
-            printf("%c ", linhas[i]);
-            for (j = 0; j < 3; j++){
-                printf("| %c ", jogo[i][j]);
-            }
-            printf("|\n");
-        }   
+        printJogo(jogo);
 
         elemento = initElementoMatriz();
         jogo[elemento.i_val][elemento.j_val] = jogador;
@@ -82,19 +107,10 @@ int main(){
         }
 
         rodada++;
-        fim_jogo = fimJogo(rodada);
+        fim_jogo = fimJogo(rodada, jogo);
     }while(!fim_jogo);
 
-    system("cls");
-    
-    printf("    1   2   3\n");
-    for (i = 0; i < 3; i++){
-        printf("%c ", linhas[i]);
-        for (j = 0; j < 3; j++){
-            printf("| %c ", jogo[i][j]);
-        }
-        printf("|\n");
-    } 
+    printJogo(jogo); 
 
     printf("\nFIM DE JOGO!");
 
