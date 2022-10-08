@@ -47,24 +47,24 @@ void printJogo(char jogo[3][3]){
     } 
 }
 
-int fimJogo(int r, char jogo[3][3]){
+int fimJogo(int r, char jogo[3][3], char user){
     int i;
 
     //VALIDAÇÃO PARA SABER SE EXISTE ALGUMA LINHA, COLUNA OU DIAGONAL DE MESMO VALOR
     for (i = 0; i < 3; i++){
-        if (jogo[i][0] == jogo[i][1] && jogo[i][1] == jogo[i][2]){
+        if (jogo[i][0] == user && jogo[i][1] == user && jogo[i][2] == user){
             return 1;
         }
     }
     for (i = 0; i < 3; i++){
-        if (jogo[0][i] == jogo[1][i] && jogo[1][i] == jogo[2][i]){
+        if (jogo[0][i] == user && jogo[1][i] == user && jogo[2][i] == user){
             return 1;
         }
     }
-    if (jogo[0][0] == jogo[1][1] && jogo[1][1] == jogo[2][2]){
+    if (jogo[0][0] == user && jogo[1][1] == user && jogo[2][2] == user){
         return 1;
     }
-    if (jogo[2][0] == jogo[1][1] && jogo[1][1] == jogo[0][2]){
+    if (jogo[2][0] == user && jogo[1][1] == user && jogo[0][2] == user){
         return 1;
     }
 
@@ -84,7 +84,7 @@ int main(){
     tElementoMatriz elemento;
 
     int i, j;
-    int fim_jogo = 0, rodada=0;
+    int fim_jogo_x = 0, fim_jogo_o = 0, rodada=0;
     char jogador = 'X';
 
     for (i = 0; i < 3; i++){
@@ -107,11 +107,19 @@ int main(){
         }
 
         rodada++;
-        fim_jogo = fimJogo(rodada, jogo);
-    }while(!fim_jogo);
+        fim_jogo_x = fimJogo(rodada, jogo, 'X');
+        fim_jogo_o = fimJogo(rodada, jogo, 'O');
+    }while(!fim_jogo_x && !fim_jogo_o);
 
     printJogo(jogo); 
 
+    if (fim_jogo_o){
+        printf("\nGANHOU [O]!");
+    }else if (fim_jogo_x){
+        printf("\nGANHOU [X]!");
+    }else{
+        printf("\nNINGUEM GANHOU!");
+    }
     printf("\nFIM DE JOGO!");
 
     return 0;
