@@ -47,7 +47,7 @@ void printJogo(char jogo[3][3]){
     } 
 }
 
-int fimJogo(int r, char jogo[3][3], char user){
+int fimJogo(char jogo[3][3], char user){
     int i;
 
     //VALIDAÇÃO PARA SABER SE EXISTE ALGUMA LINHA, COLUNA OU DIAGONAL DE MESMO VALOR
@@ -68,25 +68,18 @@ int fimJogo(int r, char jogo[3][3], char user){
         return 1;
     }
 
-    //SE O NÚMERO DE RODADAS É 9 NÃO HÁ MAIS MOVIMENTOS POSSÍVEIS
-    if(r == 9){
-        return 1;
-    }
-
     return 0;
 }
 
 int main(){
 
     char jogo [3] [3];
-    
-
-    tElementoMatriz elemento;
-
-    int i, j;
-    int fim_jogo_x = 0, fim_jogo_o = 0, rodada=0;
     char jogador = 'X';
+    int i, j;
+    int fim_jogo = 0, rodada=0;
+    tElementoMatriz elemento;   
 
+    //INICIALIZAÇÃO DOS ELEMENTOS DE "jogo" com ' '
     for (i = 0; i < 3; i++){
         for (j = 0; j < 3; j++){
             jogo[i][j] = ' ';
@@ -97,26 +90,33 @@ int main(){
         
         printJogo(jogo);
 
+        //JOGADOE ESCOLHE SUA JOGADA
         elemento = initElementoMatriz();
         jogo[elemento.i_val][elemento.j_val] = jogador;
 
+        fim_jogo = fimJogo(jogo, jogador);
+
+        //CONDIÇÕES PARA FINALIZAR O JOGO
+        rodada++;
+        if (rodada == 9){
+            break;
+        }
+        if (fim_jogo){
+            continue;
+        }
+
+        //TROCA O JOGADOR NO FIM DA RODADA
         if (jogador == 'X'){
             jogador = 'O';
         }else{
             jogador = 'X';
         }
-
-        rodada++;
-        fim_jogo_x = fimJogo(rodada, jogo, 'X');
-        fim_jogo_o = fimJogo(rodada, jogo, 'O');
-    }while(!fim_jogo_x && !fim_jogo_o);
+    }while(!fim_jogo);
 
     printJogo(jogo); 
 
-    if (fim_jogo_o){
-        printf("\nGANHOU [O]!");
-    }else if (fim_jogo_x){
-        printf("\nGANHOU [X]!");
+    if (fim_jogo){
+        printf("\nGANHOU [%c]!", jogador);
     }else{
         printf("\nNINGUEM GANHOU!");
     }
