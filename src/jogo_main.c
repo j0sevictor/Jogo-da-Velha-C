@@ -115,18 +115,17 @@ int main(){
     tMatrizJogo jogo;
     tElementoMatriz elemento;
     char jogador;
-    int i, j;
     int fim_jogo, rodada;
 
     //INICIALIZAÇÃO DOS ELEMENTOS DA MATRIZ DE "jogo"
     jogo = initMatrizJogo();
+
     //INICIALIZAÇÃO DAS VARIÁVEIS NECESSÁRIAS
     jogador = 'X';
     fim_jogo = 0;
-    rodada=0;   
+    rodada = 0;   
 
-    do{
-        
+    do{ 
         printJogo(jogo);
 
         //JOGADOE ESCOLHE SUA JOGADA, COM VALIDAÇÃO
