@@ -21,7 +21,7 @@ tElementoMatriz initElementoMatriz(){
         if (linha == 'A' || linha == 'B' || linha == 'C'){
             break;
         }else{
-            printf("INVALIDO! TENTE DE NOVO ");
+            printf("INVALIDO! TENTE DE NOVO\n");
         }
     }
     while (1){
@@ -30,7 +30,7 @@ tElementoMatriz initElementoMatriz(){
         if (coluna >= 1 && coluna <= 3){
             break;
         }else{
-            printf("INVALIDO! TENTE DE NOVO ");
+            printf("INVALIDO! TENTE DE NOVO\n");
         }
     }
 
@@ -116,60 +116,74 @@ int main(){
     tElementoMatriz elemento;
     char jogador;
     int fim_jogo, rodada;
+    int deNovo;  
 
-    //INICIALIZAÇÃO DOS ELEMENTOS DA MATRIZ DE "jogo"
-    jogo = initMatrizJogo();
+    do{
+        //INICIALIZAÇÃO DOS ELEMENTOS DA MATRIZ DE "jogo"
+        jogo = initMatrizJogo();
 
-    //INICIALIZAÇÃO DAS VARIÁVEIS NECESSÁRIAS
-    jogador = 'X';
-    fim_jogo = 0;
-    rodada = 0;   
+        //INICIALIZAÇÃO DAS VARIÁVEIS NECESSÁRIAS
+        jogador = 'X';
+        fim_jogo = 0;
+        rodada = 0; 
 
-    do{ 
-        printJogo(jogo);
+        do{ 
+            printJogo(jogo);
 
-        //JOGADOE ESCOLHE SUA JOGADA, COM VALIDAÇÃO
-        while(1){
-            //USUÁRIO DIGITA EM QUAL POSIÇÃO QUER JOGAR
-            elemento = initElementoMatriz();
+            //JOGADOE ESCOLHE SUA JOGADA, COM VALIDAÇÃO
+            while(1){
+                //USUÁRIO DIGITA EM QUAL POSIÇÃO QUER JOGAR
+                elemento = initElementoMatriz();
 
-            if (existeNaMatriz(jogo, elemento)){
-                printJogo(jogo);
-                printf("INVALIDO! ESCOLHA DE NOVO\n");
-            }else{
-                jogo.matrizJogo[elemento.i_val][elemento.j_val] = jogador;
+                if (existeNaMatriz(jogo, elemento)){
+                    printJogo(jogo);
+                    printf("INVALIDO! ESCOLHA DE NOVO\n");
+                }else{
+                    jogo.matrizJogo[elemento.i_val][elemento.j_val] = jogador;
+                    break;
+                }
+            }
+
+            //TESTE PARA SABER SE ALGUEM GANHOU E INCREMENTA A RODADA
+            fim_jogo = fimJogo(jogo, jogador);
+            rodada++;
+
+            //CONDIÇÕES PARA FINALIZAR O JOGO
+            if (rodada == 9){
                 break;
             }
-        }
+            if (fim_jogo){
+                continue;
+            }
 
-        //TESTE PARA SABER SE ALGUEM GANHOU E INCREMENTA A RODADA
-        fim_jogo = fimJogo(jogo, jogador);
-        rodada++;
+            //TROCA O JOGADOR NO FIM DA RODADA
+            if (jogador == 'X'){
+                jogador = 'O';
+            }else{
+                jogador = 'X';
+            }
+        }while(!fim_jogo);
 
-        //CONDIÇÕES PARA FINALIZAR O JOGO
-        if (rodada == 9){
-            break;
-        }
+        //IMPRESSÃO DOS RESULTADOS DO JOGO
+        printJogo(jogo); 
         if (fim_jogo){
-            continue;
-        }
-
-        //TROCA O JOGADOR NO FIM DA RODADA
-        if (jogador == 'X'){
-            jogador = 'O';
+            printf("\nGANHOU [%c]!", jogador);
         }else{
-            jogador = 'X';
+            printf("\nNINGUEM GANHOU!");
         }
-    }while(!fim_jogo);
+        printf("\nFIM DE JOGO!");
 
-    printJogo(jogo); 
-
-    if (fim_jogo){
-        printf("\nGANHOU [%c]!", jogador);
-    }else{
-        printf("\nNINGUEM GANHOU!");
-    }
-    printf("\nFIM DE JOGO!");
-
+        //CONDIÇÕES PARA INICIAR UMA NOVA PARTIDA OU NÃO
+        while (1){
+            printf("\nJOGAR NOVAMENTE? \n[1] - SIM\n[0] - NAO\n");
+            scanf("%d", &deNovo);
+            if (deNovo == 1 || deNovo == 0){
+                break;
+            }else{
+                printf("RESPOSTA INVALIDA!");
+            }
+        }
+    }while(deNovo);
+    
     return 0;
 }
