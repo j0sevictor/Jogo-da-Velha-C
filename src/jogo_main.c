@@ -14,7 +14,7 @@ tElementoMatriz initElementoMatriz(){
     char linha;
     int coluna;
 
-    //RECEBE O VALOR DA LINHA QUE O USUÁRIO DIGITAR
+    //RECEBE O VALOR DA LINHA QUE O USUÁRIO DIGITAR E VALIDA
     while (1){
         printf("Escolha uma Linha: ");
         scanf(" %c", &linha);
@@ -24,10 +24,11 @@ tElementoMatriz initElementoMatriz(){
             printf("INVALIDO! TENTE DE NOVO\n");
         }
     }
+    //RECEBE O VALOR DA COLUNA QUE O USUÁRIO DIGITAR E VALIDA
     while (1){
         printf("Escolha uma Coluna: ");
         scanf("%d", &coluna);
-        if (coluna >= 1 && coluna <= 3){
+        if (coluna == 1 || coluna == 2 || coluna == 3){
             break;
         }else{
             printf("INVALIDO! TENTE DE NOVO\n");
@@ -48,7 +49,7 @@ tElementoMatriz initElementoMatriz(){
 }
 //----------------------------------------
 
-//MATRIZ DO JOGO
+//MATRIZ DO JOGO---------------------------
 typedef struct {
     char matrizJogo[INDEX_LINHAS][INDEX_COLUNAS];
 } tMatrizJogo;
