@@ -144,7 +144,7 @@ int main(){
                 }
             }
 
-            //TESTE PARA SABER SE ALGUEM GANHOU E INCREMENTA A RODADA
+            //TESTE PARA SABER SE ALGUEM GANHOU E INCREMENTO NA RODADA
             fim_jogo = fimJogo(jogo, jogador);
             rodada++;
 
