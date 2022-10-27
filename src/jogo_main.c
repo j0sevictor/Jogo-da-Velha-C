@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define INDEX_LINHAS 3
-#define INDEX_COLUNAS 3
 
 //ELEMENTO DA MATRIZ----------------------
 typedef struct {
@@ -51,7 +49,7 @@ tElementoMatriz initElementoMatriz(){
 
 //MATRIZ DO JOGO---------------------------
 typedef struct {
-    char matrizJogo[INDEX_LINHAS][INDEX_COLUNAS];
+    char matrizJogo[3][3];
 } tMatrizJogo;
 
 tMatrizJogo initMatrizJogo(){
@@ -116,8 +114,7 @@ int main(){
     tMatrizJogo jogo;
     tElementoMatriz elemento;
     char jogador;
-    int fim_jogo, rodada;
-    int deNovo;  
+    int fim_jogo, rodada, deNovo;  
 
     do{
         //INICIALIZAÇÃO DOS ELEMENTOS DA MATRIZ DE "jogo"
@@ -131,7 +128,7 @@ int main(){
         do{ 
             printJogo(jogo);
 
-            //JOGADOE ESCOLHE SUA JOGADA, COM VALIDAÇÃO
+            //JOGADOE ESCOLHE SUA JOGADA
             while(1){
                 //USUÁRIO DIGITA EM QUAL POSIÇÃO QUER JOGAR
                 elemento = initElementoMatriz();
@@ -165,7 +162,7 @@ int main(){
             }
         }while(!fim_jogo);
 
-        //IMPRESSÃO DOS RESULTADOS DO JOGO
+        //IMPRIME O RESULTADO DO JOGO
         printJogo(jogo); 
         if (fim_jogo){
             printf("\nGANHOU [%c]!", jogador);
