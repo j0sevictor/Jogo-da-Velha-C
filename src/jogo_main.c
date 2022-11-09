@@ -1,74 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-//ELEMENTO DA MATRIZ----------------------
-typedef struct {
-    int i_val;
-    int j_val;
-} tElementoMatriz;
-
-tElementoMatriz initElementoMatriz(){
-    tElementoMatriz m;
-    char linha;
-    int coluna;
-
-    //RECEBE O VALOR DA LINHA QUE O USUÁRIO DIGITAR E VALIDA
-    while (1){
-        printf("Escolha uma Linha: ");
-        scanf(" %c", &linha);
-        if (linha == 'A' || linha == 'B' || linha == 'C'){
-            break;
-        }else{
-            printf("INVALIDO! TENTE DE NOVO\n");
-        }
-    }
-    //RECEBE O VALOR DA COLUNA QUE O USUÁRIO DIGITAR E VALIDA
-    while (1){
-        printf("Escolha uma Coluna: ");
-        scanf("%d", &coluna);
-        if (coluna == 1 || coluna == 2 || coluna == 3){
-            break;
-        }else{
-            printf("INVALIDO! TENTE DE NOVO\n");
-        }
-    }
-
-    if(linha == 'A'){
-        m.i_val = 0;
-    }else if (linha == 'B'){
-        m.i_val = 1;
-    }else if (linha == 'C'){
-        m.i_val = 2;
-    }
-
-    m.j_val = coluna - 1;
-
-    return m;
-}
-//----------------------------------------
-
-//MATRIZ DO JOGO---------------------------
-typedef struct {
-    char matrizJogo[3][3];
-} tMatrizJogo;
-
-tMatrizJogo initMatrizJogo(){
-    tMatrizJogo mj;
-    int i, j;
-
-    for (i = 0; i < 3; i++){
-        for (j = 0; j < 3; j++){
-            mj.matrizJogo[i][j] = ' ';
-        }
-    }
-
-    return mj;
-}
-
-int existeNaMatriz(tMatrizJogo matriz, tElementoMatriz elemento){
-    return matriz.matrizJogo[elemento.i_val][elemento.j_val] != ' ';
-}
-//-------------------------------------
+#include "tMatrizJogo.h"
 
 void printJogo(tMatrizJogo jogo){
     int i, j;
@@ -131,6 +63,7 @@ int main(){
             //JOGADOE ESCOLHE SUA JOGADA
             while(1){
                 //USUÁRIO DIGITA EM QUAL POSIÇÃO QUER JOGAR
+                printf("JOGA -> [%c]\nA", jogador);
                 elemento = initElementoMatriz();
 
                 if (existeNaMatriz(jogo, elemento)){
