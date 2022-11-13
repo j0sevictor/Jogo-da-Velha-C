@@ -18,7 +18,7 @@ tMatrizJogo initMatrizJogo(){
     return mj;
 }
 
-int existeNaMatriz(tMatrizJogo matriz, tElementoMatriz elemento){
-    return matriz.matrizJogo[elemento.i_val][elemento.j_val] != ' ';
+int existeNaMatriz(tMatrizJogo* matriz, tElementoMatriz elemento){
+    return matriz->matrizJogo[elemento.i_val][elemento.j_val] != ' ';
 }
 //-------------------------------------
