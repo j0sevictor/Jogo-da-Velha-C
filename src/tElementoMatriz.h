@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 //ELEMENTO DA MATRIZ----------------------
 typedef struct {
     int i_val;
