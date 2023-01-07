@@ -1,25 +1,33 @@
 #include <stdio.h>
 
 //ELEMENTO DA MATRIZ----------------------
-typedef struct {
+typedef struct 
+{
     int i_val;
     int j_val;
-} tElementoMatriz;
+}
+tElementoMatriz;
 
-tElementoMatriz initElementoMatriz(){
+tElementoMatriz initElementoMatriz(void)
+{
     tElementoMatriz m;
     char linha[3];
 
     //RECEBE O VALOR DA LINHA E DA COLUNA QUE O USUÁRIO DIGITAR E VALIDA
-    while (1){
+    while (1)
+    {
         printf("Escolha uma Linha e Coluna: ");
         scanf("%s", &linha);
         
-        if (linha[0] == 'A' || linha[0] == 'B' || linha[0] == 'C'){
-            if (linha[1] == '1' || linha[1] == '2' || linha[1] == '3'){
+        if (linha[0] == 'A' || linha[0] == 'B' || linha[0] == 'C')
+        {
+            if (linha[1] == '1' || linha[1] == '2' || linha[1] == '3')
+            {
                 break;
             }
-        }else{
+        }
+        else
+        {
             printf("INVALIDO! TENTE DE NOVO\n");
         }
     }

@@ -1,16 +1,21 @@
 #include "tElementoMatriz.h"
 
 //MATRIZ DO JOGO---------------------------
-typedef struct {
+typedef struct 
+{
     char matrizJogo[3][3];
-} tMatrizJogo;
+} 
+tMatrizJogo;
 
-tMatrizJogo initMatrizJogo(){
+tMatrizJogo initMatrizJogo()
+{
     tMatrizJogo mj;
     int i, j;
 
-    for (i = 0; i < 3; i++){
-        for (j = 0; j < 3; j++){
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
             mj.matrizJogo[i][j] = ' ';
         }
     }
@@ -18,7 +23,8 @@ tMatrizJogo initMatrizJogo(){
     return mj;
 }
 
-int existeNaMatriz(tMatrizJogo* matriz, tElementoMatriz elemento){
+int existeNaMatriz(tMatrizJogo* matriz, tElementoMatriz elemento)
+{
     return matriz->matrizJogo[elemento.i_val][elemento.j_val] != ' ';
 }
 //-------------------------------------
